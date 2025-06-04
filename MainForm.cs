@@ -1,6 +1,7 @@
-using CassetteRentals.Models;
+﻿using CassetteRentals.Models;
 using System.ComponentModel;
 using System.Data.SQLite;
+using System.Drawing.Printing;
 using System.Text.RegularExpressions;
 
 namespace CassetteRentals
@@ -11,10 +12,10 @@ namespace CassetteRentals
 
         private List<Client> clients = new List<Client>();
         private List<Movie> movies = new List<Movie>();
-        //private int nextClientId = 1; // For generating unique IDs
         private int? selectedClientId = null;
         private int? selectedMovieId = null;
-
+        private RentalCharts rentalChart;
+        private PrintDocument printDocument;
 
         private class ComboBoxItem
         {
@@ -29,7 +30,94 @@ namespace CassetteRentals
             this.Load += MainForm_Load;
             textBoxEmail.Validating += TextBoxEmail_Validating;
             textBoxPhone.Validating += TextBoxPhone_Validating;
+
+            rentalChart = new RentalCharts();
+            rentalChart.Location = new Point(10, 90);
+            rentalChart.Size = new Size(800, 400);
+            rentalChart.BorderStyle = BorderStyle.FixedSingle;
+
+            Label lblChartTitle = new Label();
+            lblChartTitle.Text = "Număr de închirieri pe lună";
+            lblChartTitle.Font = new Font("Segoe UI", 16, FontStyle.Bold);
+            lblChartTitle.Location = new Point(10, 10);
+            lblChartTitle.AutoSize = true;
+
+            statistics.Controls.Add(lblChartTitle);
+            statistics.Controls.Add(rentalChart);
+
+            printDocument = new PrintDocument();
+            printDocument.PrintPage += PrintDocument_PrintPage; ;
         }
+
+        private void PrintDocument_PrintPage(object sender, PrintPageEventArgs e)
+        {
+            Font headerFont = new Font("Arial", 12, FontStyle.Bold);
+            Font rowFont = new Font("Arial", 11);
+            float lineHeight = rowFont.GetHeight(e.Graphics) + 5;
+            float x = e.MarginBounds.Left;
+            float y = e.MarginBounds.Top;
+
+            // Draw header
+            string[] headers = listViewRentals.Columns.Cast<ColumnHeader>().Select(c => c.Text).ToArray();
+            for (int i = 0; i < headers.Length; i++)
+            {
+                e.Graphics.DrawString(headers[i], headerFont, Brushes.Black, x + i * 120, y);
+            }
+
+            y += lineHeight;
+
+            // Draw each row
+            foreach (ListViewItem item in listViewRentals.Items)
+            {
+                for (int i = 0; i < item.SubItems.Count; i++)
+                {
+                    e.Graphics.DrawString(item.SubItems[i].Text, rowFont, Brushes.Black, x + i * 120, y);
+                }
+                y += lineHeight;
+
+                if (y + lineHeight > e.MarginBounds.Bottom)
+                {
+                    e.HasMorePages = true;
+                    return;
+                }
+            }
+
+            e.HasMorePages = false;
+        }
+
+        private Dictionary<string, int> GetRentalsByMonth()
+        {
+            var result = new Dictionary<string, int>();
+
+            using (var conn = new SQLiteConnection($"Data Source={dbPath};Version=3;"))
+            {
+                conn.Open();
+
+                string query = @"
+            SELECT RentalDate 
+            FROM Rentals
+            ORDER BY RentalDate";
+
+                using (var cmd = new SQLiteCommand(query, conn))
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        if (DateTime.TryParse(reader["RentalDate"].ToString(), out DateTime rentalDate))
+                        {
+                            string key = rentalDate.ToString("MMM yyyy"); // ex: "Jun 2025"
+                            if (result.ContainsKey(key))
+                                result[key]++;
+                            else
+                                result[key] = 1;
+                        }
+                    }
+                }
+            }
+
+            return result;
+        }
+
 
         private void TextBoxEmail_Validating(object sender, CancelEventArgs e)
         {
@@ -193,40 +281,6 @@ namespace CassetteRentals
                 });
             }
         }
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void clientsTab_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void labelLn_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void listViewRentals_SelectedIndexChanged_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void listViewRentals_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblCbMovie_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void MainForm_Load(object sender, EventArgs e)
         {
@@ -236,6 +290,9 @@ namespace CassetteRentals
             LoadClientComboBox();
             LoadMovieComboBox();
             LoadRentalsFromDatabase();
+
+            var rentalsByMonth = GetRentalsByMonth();
+            rentalChart.LoadChartData(rentalsByMonth);
         }
 
         private void listViewClients_SelectedIndexChanged(object sender, EventArgs e)
@@ -670,6 +727,64 @@ namespace CassetteRentals
             LoadRentalsFromDatabase();
             LoadMoviesFromDatabase();
             LoadMovieComboBox();
+        }
+
+        private void ExportList(ListView listView, string filename)
+        {
+            using (SaveFileDialog sfd = new SaveFileDialog())
+            {
+                sfd.Filter = "CSV files (*.csv)|*.csv";
+                sfd.FileName = filename;
+                if (sfd.ShowDialog() == DialogResult.OK)
+                {
+                    using (StreamWriter sw = new StreamWriter(sfd.FileName))
+                    {
+                        // Header
+                        var headers = listView.Columns.Cast<ColumnHeader>().Select(c => c.Text);
+                        sw.WriteLine(string.Join(",", headers));
+
+                        // Rows
+                        foreach (ListViewItem item in listView.Items)
+                        {
+                            var row = item.SubItems.Cast<ListViewItem.ListViewSubItem>().Select(s => s.Text);
+                            sw.WriteLine(string.Join(",", row));
+                        }
+                    }
+                    MessageBox.Show("Exported successfully to " + sfd.FileName);
+                }
+            }
+        }
+        private void exportClientsListToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ExportList(listViewClients, "ClientsList.csv");
+        }
+
+
+        private void closeFormToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void printDocumentToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (PrintPreviewDialog previewDialog = new PrintPreviewDialog())
+            {
+                previewDialog.Document = printDocument;
+                previewDialog.Width = 1000;
+                previewDialog.Height = 800;
+
+                if (previewDialog.ShowDialog() == DialogResult.OK)
+                {
+                    using (PrintDialog printDialog = new PrintDialog())
+                    {
+                        printDialog.Document = printDocument;
+                        if (printDialog.ShowDialog() == DialogResult.OK)
+                        {
+                            printDocument.Print();
+                        }
+                    }
+                }
+            }
         }
 
 

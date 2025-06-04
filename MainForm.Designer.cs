@@ -7,6 +7,8 @@
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
+
+
         /// <summary>
         ///  Clean up any resources being used.
         /// </summary>
@@ -33,16 +35,16 @@
             clientsTab = new TabPage();
             groupBoxClients = new GroupBox();
             btnDeleteClient = new Button();
-            btnEditClient = new Button();
-            btnAddClient = new Button();
-            labelPhone = new Label();
-            textBoxPhone = new TextBox();
             listViewClients = new ListView();
             ID = new ColumnHeader();
             firstName = new ColumnHeader();
             lastName = new ColumnHeader();
             email = new ColumnHeader();
             phone = new ColumnHeader();
+            btnEditClient = new Button();
+            btnAddClient = new Button();
+            labelPhone = new Label();
+            textBoxPhone = new TextBox();
             labelLn = new Label();
             textBoxLn = new TextBox();
             textBoxFn = new TextBox();
@@ -69,6 +71,7 @@
             textBoxYear = new TextBox();
             rentalsTsb = new TabPage();
             groupBoxRentals = new GroupBox();
+            checkBox1 = new CheckBox();
             btnReturnRental = new Button();
             btnAddRental = new Button();
             lblDtpRental = new Label();
@@ -83,7 +86,18 @@
             movie = new ColumnHeader();
             rentalDate = new ColumnHeader();
             returnDate = new ColumnHeader();
+            statistics = new TabPage();
             errorProvider = new ErrorProvider(components);
+            menuStrip1 = new MenuStrip();
+            fileToolStripMenuItem = new ToolStripMenuItem();
+            toolStripSeparator1 = new ToolStripSeparator();
+            printRentalsListToolStripMenuItem = new ToolStripMenuItem();
+            printDocumentToolStripMenuItem = new ToolStripMenuItem();
+            toolStripSeparator2 = new ToolStripSeparator();
+            exportClientsListToolStripMenuItem = new ToolStripMenuItem();
+            exitToolStripMenuItem = new ToolStripMenuItem();
+            closeFormToolStripMenuItem = new ToolStripMenuItem();
+            aboutToolStripMenuItem = new ToolStripMenuItem();
             tabControlMain.SuspendLayout();
             clientsTab.SuspendLayout();
             groupBoxClients.SuspendLayout();
@@ -92,6 +106,7 @@
             rentalsTsb.SuspendLayout();
             groupBoxRentals.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)errorProvider).BeginInit();
+            menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // tabControlMain
@@ -99,10 +114,11 @@
             tabControlMain.Controls.Add(clientsTab);
             tabControlMain.Controls.Add(moviesTab);
             tabControlMain.Controls.Add(rentalsTsb);
-            tabControlMain.Location = new Point(0, 0);
+            tabControlMain.Controls.Add(statistics);
+            tabControlMain.Location = new Point(1, 75);
             tabControlMain.Name = "tabControlMain";
             tabControlMain.SelectedIndex = 0;
-            tabControlMain.Size = new Size(2158, 1237);
+            tabControlMain.Size = new Size(2417, 1394);
             tabControlMain.TabIndex = 0;
             // 
             // clientsTab
@@ -111,35 +127,34 @@
             clientsTab.Location = new Point(10, 58);
             clientsTab.Name = "clientsTab";
             clientsTab.Padding = new Padding(3);
-            clientsTab.Size = new Size(2138, 1169);
+            clientsTab.Size = new Size(2397, 1326);
             clientsTab.TabIndex = 0;
             clientsTab.Text = "Clients";
             clientsTab.UseVisualStyleBackColor = true;
-            clientsTab.Click += clientsTab_Click;
             // 
             // groupBoxClients
             // 
             groupBoxClients.Controls.Add(btnDeleteClient);
+            groupBoxClients.Controls.Add(listViewClients);
             groupBoxClients.Controls.Add(btnEditClient);
             groupBoxClients.Controls.Add(btnAddClient);
             groupBoxClients.Controls.Add(labelPhone);
             groupBoxClients.Controls.Add(textBoxPhone);
-            groupBoxClients.Controls.Add(listViewClients);
             groupBoxClients.Controls.Add(labelLn);
             groupBoxClients.Controls.Add(textBoxLn);
             groupBoxClients.Controls.Add(textBoxFn);
             groupBoxClients.Controls.Add(labelEmail);
             groupBoxClients.Controls.Add(labelFn);
             groupBoxClients.Controls.Add(textBoxEmail);
-            groupBoxClients.Location = new Point(6, 15);
+            groupBoxClients.Location = new Point(6, 6);
             groupBoxClients.Name = "groupBoxClients";
-            groupBoxClients.Size = new Size(2130, 1154);
+            groupBoxClients.Size = new Size(2366, 1308);
             groupBoxClients.TabIndex = 9;
             groupBoxClients.TabStop = false;
             // 
             // btnDeleteClient
             // 
-            btnDeleteClient.Location = new Point(780, 1051);
+            btnDeleteClient.Location = new Point(771, 1193);
             btnDeleteClient.Name = "btnDeleteClient";
             btnDeleteClient.Size = new Size(188, 58);
             btnDeleteClient.TabIndex = 12;
@@ -147,54 +162,15 @@
             btnDeleteClient.UseVisualStyleBackColor = true;
             btnDeleteClient.Click += btnDeleteClient_Click;
             // 
-            // btnEditClient
-            // 
-            btnEditClient.Location = new Point(780, 965);
-            btnEditClient.Name = "btnEditClient";
-            btnEditClient.Size = new Size(188, 58);
-            btnEditClient.TabIndex = 11;
-            btnEditClient.Text = "Edit";
-            btnEditClient.UseVisualStyleBackColor = true;
-            btnEditClient.Click += btnEditClient_Click;
-           
-            // 
-            // btnAddClient
-            // 
-            btnAddClient.BackColor = Color.Transparent;
-            btnAddClient.Location = new Point(780, 877);
-            btnAddClient.Name = "btnAddClient";
-            btnAddClient.Size = new Size(188, 58);
-            btnAddClient.TabIndex = 9;
-            btnAddClient.Text = "Add Client";
-            btnAddClient.UseVisualStyleBackColor = false;
-            btnAddClient.Click += btnAddClient_Click;
-            // 
-            // labelPhone
-            // 
-            labelPhone.AutoSize = true;
-            labelPhone.Location = new Point(54, 1082);
-            labelPhone.Name = "labelPhone";
-            labelPhone.Size = new Size(103, 41);
-            labelPhone.TabIndex = 8;
-            labelPhone.Text = "Phone";
-           
-            // 
-            // textBoxPhone
-            // 
-            textBoxPhone.Location = new Point(220, 1076);
-            textBoxPhone.Name = "textBoxPhone";
-            textBoxPhone.Size = new Size(250, 47);
-            textBoxPhone.TabIndex = 3;
-            // 
             // listViewClients
             // 
             listViewClients.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             listViewClients.Columns.AddRange(new ColumnHeader[] { ID, firstName, lastName, email, phone });
             listViewClients.FullRowSelect = true;
             listViewClients.GridLines = true;
-            listViewClients.Location = new Point(6, 0);
+            listViewClients.Location = new Point(6, 15);
             listViewClients.Name = "listViewClients";
-            listViewClients.Size = new Size(2118, 854);
+            listViewClients.Size = new Size(2354, 967);
             listViewClients.TabIndex = 0;
             listViewClients.UseCompatibleStateImageBehavior = false;
             listViewClients.View = View.Details;
@@ -220,26 +196,62 @@
             // 
             phone.Text = "Phone";
             // 
+            // btnEditClient
+            // 
+            btnEditClient.Location = new Point(771, 1107);
+            btnEditClient.Name = "btnEditClient";
+            btnEditClient.Size = new Size(188, 58);
+            btnEditClient.TabIndex = 11;
+            btnEditClient.Text = "&Edit";
+            btnEditClient.UseVisualStyleBackColor = true;
+            btnEditClient.Click += btnEditClient_Click;
+            // 
+            // btnAddClient
+            // 
+            btnAddClient.BackColor = Color.Transparent;
+            btnAddClient.Location = new Point(771, 1019);
+            btnAddClient.Name = "btnAddClient";
+            btnAddClient.Size = new Size(188, 58);
+            btnAddClient.TabIndex = 9;
+            btnAddClient.Text = "&Add Client";
+            btnAddClient.UseVisualStyleBackColor = false;
+            btnAddClient.Click += btnAddClient_Click;
+            // 
+            // labelPhone
+            // 
+            labelPhone.AutoSize = true;
+            labelPhone.Location = new Point(45, 1224);
+            labelPhone.Name = "labelPhone";
+            labelPhone.Size = new Size(103, 41);
+            labelPhone.TabIndex = 8;
+            labelPhone.Text = "Phone";
+            // 
+            // textBoxPhone
+            // 
+            textBoxPhone.Location = new Point(211, 1218);
+            textBoxPhone.Name = "textBoxPhone";
+            textBoxPhone.Size = new Size(250, 47);
+            textBoxPhone.TabIndex = 3;
+            // 
             // labelLn
             // 
             labelLn.AutoSize = true;
-            labelLn.Location = new Point(54, 948);
+            labelLn.Location = new Point(45, 1090);
             labelLn.Name = "labelLn";
             labelLn.Size = new Size(157, 41);
             labelLn.TabIndex = 6;
             labelLn.Text = "Last Name";
-            labelLn.Click += labelLn_Click;
             // 
             // textBoxLn
             // 
-            textBoxLn.Location = new Point(220, 942);
+            textBoxLn.Location = new Point(211, 1084);
             textBoxLn.Name = "textBoxLn";
             textBoxLn.Size = new Size(250, 47);
             textBoxLn.TabIndex = 1;
             // 
             // textBoxFn
             // 
-            textBoxFn.Location = new Point(220, 872);
+            textBoxFn.Location = new Point(211, 1014);
             textBoxFn.Name = "textBoxFn";
             textBoxFn.Size = new Size(250, 47);
             textBoxFn.TabIndex = 0;
@@ -247,17 +259,16 @@
             // labelEmail
             // 
             labelEmail.AutoSize = true;
-            labelEmail.Location = new Point(54, 1016);
+            labelEmail.Location = new Point(45, 1158);
             labelEmail.Name = "labelEmail";
             labelEmail.Size = new Size(88, 41);
             labelEmail.TabIndex = 2;
             labelEmail.Text = "Email";
-            labelEmail.Click += label1_Click;
             // 
             // labelFn
             // 
             labelFn.AutoSize = true;
-            labelFn.Location = new Point(54, 878);
+            labelFn.Location = new Point(45, 1020);
             labelFn.Name = "labelFn";
             labelFn.Size = new Size(160, 41);
             labelFn.TabIndex = 4;
@@ -265,7 +276,7 @@
             // 
             // textBoxEmail
             // 
-            textBoxEmail.Location = new Point(220, 1010);
+            textBoxEmail.Location = new Point(211, 1152);
             textBoxEmail.Name = "textBoxEmail";
             textBoxEmail.Size = new Size(250, 47);
             textBoxEmail.TabIndex = 2;
@@ -276,7 +287,7 @@
             moviesTab.Location = new Point(10, 58);
             moviesTab.Name = "moviesTab";
             moviesTab.Padding = new Padding(3);
-            moviesTab.Size = new Size(2138, 1169);
+            moviesTab.Size = new Size(2397, 1326);
             moviesTab.TabIndex = 1;
             moviesTab.Text = "Movies";
             moviesTab.UseVisualStyleBackColor = true;
@@ -309,7 +320,6 @@
             chkBoxAvailable.TabIndex = 13;
             chkBoxAvailable.Text = "Available";
             chkBoxAvailable.UseVisualStyleBackColor = true;
-            chkBoxAvailable.CheckedChanged += checkBox1_CheckedChanged;
             // 
             // btnDeleteMve
             // 
@@ -330,7 +340,6 @@
             btnEditMve.Text = "Edit";
             btnEditMve.UseVisualStyleBackColor = true;
             btnEditMve.Click += btnEditMve_Click;
-            
             // 
             // brnAddMve
             // 
@@ -342,7 +351,6 @@
             brnAddMve.Text = "Add";
             brnAddMve.UseVisualStyleBackColor = false;
             brnAddMve.Click += brnAddMve_Click;
-           
             // 
             // listViewMovies
             // 
@@ -431,13 +439,14 @@
             rentalsTsb.Controls.Add(groupBoxRentals);
             rentalsTsb.Location = new Point(10, 58);
             rentalsTsb.Name = "rentalsTsb";
-            rentalsTsb.Size = new Size(2138, 1169);
+            rentalsTsb.Size = new Size(2397, 1326);
             rentalsTsb.TabIndex = 2;
             rentalsTsb.Text = "Rentals";
             rentalsTsb.UseVisualStyleBackColor = true;
             // 
             // groupBoxRentals
             // 
+            groupBoxRentals.Controls.Add(checkBox1);
             groupBoxRentals.Controls.Add(btnReturnRental);
             groupBoxRentals.Controls.Add(btnAddRental);
             groupBoxRentals.Controls.Add(lblDtpRental);
@@ -452,6 +461,16 @@
             groupBoxRentals.Size = new Size(2138, 1166);
             groupBoxRentals.TabIndex = 0;
             groupBoxRentals.TabStop = false;
+            // 
+            // checkBox1
+            // 
+            checkBox1.AutoSize = true;
+            checkBox1.Location = new Point(1454, 917);
+            checkBox1.Name = "checkBox1";
+            checkBox1.Size = new Size(197, 45);
+            checkBox1.TabIndex = 12;
+            checkBox1.Text = "checkBox1";
+            checkBox1.UseVisualStyleBackColor = true;
             // 
             // btnReturnRental
             // 
@@ -498,7 +517,6 @@
             lblCbMovie.Size = new Size(100, 41);
             lblCbMovie.TabIndex = 5;
             lblCbMovie.Text = "Movie";
-            lblCbMovie.Click += lblCbMovie_Click;
             // 
             // lblCbClient
             // 
@@ -558,17 +576,96 @@
             // 
             returnDate.Text = "Return Date";
             // 
+            // statistics
+            // 
+            statistics.Location = new Point(10, 58);
+            statistics.Name = "statistics";
+            statistics.Size = new Size(2397, 1326);
+            statistics.TabIndex = 3;
+            statistics.Text = "Statistics";
+            statistics.UseVisualStyleBackColor = true;
+            // 
             // errorProvider
             // 
             errorProvider.BlinkStyle = ErrorBlinkStyle.NeverBlink;
             errorProvider.ContainerControl = this;
             // 
+            // menuStrip1
+            // 
+            menuStrip1.ImageScalingSize = new Size(40, 40);
+            menuStrip1.Items.AddRange(new ToolStripItem[] { fileToolStripMenuItem, exitToolStripMenuItem, aboutToolStripMenuItem });
+            menuStrip1.Location = new Point(0, 0);
+            menuStrip1.Name = "menuStrip1";
+            menuStrip1.Size = new Size(2977, 49);
+            menuStrip1.TabIndex = 1;
+            menuStrip1.Text = "menuStrip1";
+            // 
+            // fileToolStripMenuItem
+            // 
+            fileToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { toolStripSeparator1, printRentalsListToolStripMenuItem, toolStripSeparator2, exportClientsListToolStripMenuItem });
+            fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            fileToolStripMenuItem.Size = new Size(87, 45);
+            fileToolStripMenuItem.Text = "&File";
+            // 
+            // toolStripSeparator1
+            // 
+            toolStripSeparator1.Name = "toolStripSeparator1";
+            toolStripSeparator1.Size = new Size(445, 6);
+            // 
+            // printRentalsListToolStripMenuItem
+            // 
+            printRentalsListToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { printDocumentToolStripMenuItem });
+            printRentalsListToolStripMenuItem.Name = "printRentalsListToolStripMenuItem";
+            printRentalsListToolStripMenuItem.Size = new Size(448, 54);
+            printRentalsListToolStripMenuItem.Text = "Print Rentals List";
+            // 
+            // printDocumentToolStripMenuItem
+            // 
+            printDocumentToolStripMenuItem.Name = "printDocumentToolStripMenuItem";
+            printDocumentToolStripMenuItem.Size = new Size(448, 54);
+            printDocumentToolStripMenuItem.Text = "Print Document";
+            printDocumentToolStripMenuItem.Click += printDocumentToolStripMenuItem_Click;
+            // 
+            // toolStripSeparator2
+            // 
+            toolStripSeparator2.Name = "toolStripSeparator2";
+            toolStripSeparator2.Size = new Size(445, 6);
+            // 
+            // exportClientsListToolStripMenuItem
+            // 
+            exportClientsListToolStripMenuItem.Name = "exportClientsListToolStripMenuItem";
+            exportClientsListToolStripMenuItem.Size = new Size(448, 54);
+            exportClientsListToolStripMenuItem.Text = "Export Clients List";
+            exportClientsListToolStripMenuItem.Click += exportClientsListToolStripMenuItem_Click;
+            // 
+            // exitToolStripMenuItem
+            // 
+            exitToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { closeFormToolStripMenuItem });
+            exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            exitToolStripMenuItem.Size = new Size(88, 45);
+            exitToolStripMenuItem.Text = "&Exit";
+            // 
+            // closeFormToolStripMenuItem
+            // 
+            closeFormToolStripMenuItem.Name = "closeFormToolStripMenuItem";
+            closeFormToolStripMenuItem.Size = new Size(334, 54);
+            closeFormToolStripMenuItem.Text = "Close Form";
+            closeFormToolStripMenuItem.Click += closeFormToolStripMenuItem_Click;
+            // 
+            // aboutToolStripMenuItem
+            // 
+            aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            aboutToolStripMenuItem.Size = new Size(124, 45);
+            aboutToolStripMenuItem.Text = "About";
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(17F, 41F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(2158, 1237);
+            ClientSize = new Size(2977, 1535);
             Controls.Add(tabControlMain);
+            Controls.Add(menuStrip1);
+            MainMenuStrip = menuStrip1;
             Name = "MainForm";
             Text = "Form1";
             tabControlMain.ResumeLayout(false);
@@ -582,7 +679,10 @@
             groupBoxRentals.ResumeLayout(false);
             groupBoxRentals.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)errorProvider).EndInit();
+            menuStrip1.ResumeLayout(false);
+            menuStrip1.PerformLayout();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -642,5 +742,17 @@
         private Label lblTitle;
         private TextBox textBoxYear;
         private ErrorProvider errorProvider;
+        private CheckBox checkBox1;
+        private TabPage statistics;
+        private MenuStrip menuStrip1;
+        private ToolStripMenuItem fileToolStripMenuItem;
+        private ToolStripMenuItem exitToolStripMenuItem;
+        private ToolStripMenuItem aboutToolStripMenuItem;
+        private ToolStripSeparator toolStripSeparator1;
+        private ToolStripMenuItem printRentalsListToolStripMenuItem;
+        private ToolStripSeparator toolStripSeparator2;
+        private ToolStripMenuItem exportClientsListToolStripMenuItem;
+        private ToolStripMenuItem closeFormToolStripMenuItem;
+        private ToolStripMenuItem printDocumentToolStripMenuItem;
     }
 }
