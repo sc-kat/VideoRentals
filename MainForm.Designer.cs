@@ -71,7 +71,6 @@
             textBoxYear = new TextBox();
             rentalsTsb = new TabPage();
             groupBoxRentals = new GroupBox();
-            checkBox1 = new CheckBox();
             btnReturnRental = new Button();
             btnAddRental = new Button();
             lblDtpRental = new Label();
@@ -86,6 +85,7 @@
             movie = new ColumnHeader();
             rentalDate = new ColumnHeader();
             returnDate = new ColumnHeader();
+            groupBox1 = new GroupBox();
             statistics = new TabPage();
             errorProvider = new ErrorProvider(components);
             menuStrip1 = new MenuStrip();
@@ -111,6 +111,7 @@
             // 
             // tabControlMain
             // 
+            tabControlMain.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             tabControlMain.Controls.Add(clientsTab);
             tabControlMain.Controls.Add(moviesTab);
             tabControlMain.Controls.Add(rentalsTsb);
@@ -154,12 +155,14 @@
             // 
             // btnDeleteClient
             // 
+            btnDeleteClient.BackColor = Color.Khaki;
+            btnDeleteClient.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             btnDeleteClient.Location = new Point(771, 1193);
             btnDeleteClient.Name = "btnDeleteClient";
-            btnDeleteClient.Size = new Size(188, 58);
+            btnDeleteClient.Size = new Size(231, 58);
             btnDeleteClient.TabIndex = 12;
             btnDeleteClient.Text = "Delete";
-            btnDeleteClient.UseVisualStyleBackColor = true;
+            btnDeleteClient.UseVisualStyleBackColor = false;
             btnDeleteClient.Click += btnDeleteClient_Click;
             // 
             // listViewClients
@@ -198,20 +201,23 @@
             // 
             // btnEditClient
             // 
+            btnEditClient.BackColor = Color.Khaki;
+            btnEditClient.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             btnEditClient.Location = new Point(771, 1107);
             btnEditClient.Name = "btnEditClient";
-            btnEditClient.Size = new Size(188, 58);
+            btnEditClient.Size = new Size(231, 58);
             btnEditClient.TabIndex = 11;
             btnEditClient.Text = "&Edit";
-            btnEditClient.UseVisualStyleBackColor = true;
+            btnEditClient.UseVisualStyleBackColor = false;
             btnEditClient.Click += btnEditClient_Click;
             // 
             // btnAddClient
             // 
-            btnAddClient.BackColor = Color.Transparent;
-            btnAddClient.Location = new Point(771, 1019);
+            btnAddClient.BackColor = Color.Khaki;
+            btnAddClient.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            btnAddClient.Location = new Point(771, 1020);
             btnAddClient.Name = "btnAddClient";
-            btnAddClient.Size = new Size(188, 58);
+            btnAddClient.Size = new Size(231, 58);
             btnAddClient.TabIndex = 9;
             btnAddClient.Text = "&Add Client";
             btnAddClient.UseVisualStyleBackColor = false;
@@ -307,14 +313,14 @@
             groupBoxMovies.Controls.Add(textBoxYear);
             groupBoxMovies.Location = new Point(0, 6);
             groupBoxMovies.Name = "groupBoxMovies";
-            groupBoxMovies.Size = new Size(2148, 1157);
+            groupBoxMovies.Size = new Size(2362, 1293);
             groupBoxMovies.TabIndex = 10;
             groupBoxMovies.TabStop = false;
             // 
             // chkBoxAvailable
             // 
             chkBoxAvailable.AutoSize = true;
-            chkBoxAvailable.Location = new Point(220, 1080);
+            chkBoxAvailable.Location = new Point(218, 1209);
             chkBoxAvailable.Name = "chkBoxAvailable";
             chkBoxAvailable.Size = new Size(173, 45);
             chkBoxAvailable.TabIndex = 13;
@@ -323,7 +329,7 @@
             // 
             // btnDeleteMve
             // 
-            btnDeleteMve.Location = new Point(780, 1051);
+            btnDeleteMve.Location = new Point(778, 1180);
             btnDeleteMve.Name = "btnDeleteMve";
             btnDeleteMve.Size = new Size(188, 58);
             btnDeleteMve.TabIndex = 12;
@@ -333,7 +339,7 @@
             // 
             // btnEditMve
             // 
-            btnEditMve.Location = new Point(780, 965);
+            btnEditMve.Location = new Point(778, 1094);
             btnEditMve.Name = "btnEditMve";
             btnEditMve.Size = new Size(188, 58);
             btnEditMve.TabIndex = 11;
@@ -344,7 +350,7 @@
             // brnAddMve
             // 
             brnAddMve.BackColor = Color.Transparent;
-            brnAddMve.Location = new Point(780, 877);
+            brnAddMve.Location = new Point(778, 1006);
             brnAddMve.Name = "brnAddMve";
             brnAddMve.Size = new Size(188, 58);
             brnAddMve.TabIndex = 9;
@@ -360,7 +366,7 @@
             listViewMovies.GridLines = true;
             listViewMovies.Location = new Point(30, 24);
             listViewMovies.Name = "listViewMovies";
-            listViewMovies.Size = new Size(2077, 790);
+            listViewMovies.Size = new Size(2291, 918);
             listViewMovies.TabIndex = 0;
             listViewMovies.UseCompatibleStateImageBehavior = false;
             listViewMovies.View = View.Details;
@@ -389,7 +395,7 @@
             // lblGenre
             // 
             lblGenre.AutoSize = true;
-            lblGenre.Location = new Point(54, 948);
+            lblGenre.Location = new Point(52, 1077);
             lblGenre.Name = "lblGenre";
             lblGenre.Size = new Size(98, 41);
             lblGenre.TabIndex = 6;
@@ -397,22 +403,22 @@
             // 
             // textBoxGenre
             // 
-            textBoxGenre.Location = new Point(220, 942);
+            textBoxGenre.Location = new Point(218, 1071);
             textBoxGenre.Name = "textBoxGenre";
-            textBoxGenre.Size = new Size(250, 47);
+            textBoxGenre.Size = new Size(418, 47);
             textBoxGenre.TabIndex = 5;
             // 
             // textBoxTitle
             // 
-            textBoxTitle.Location = new Point(220, 872);
+            textBoxTitle.Location = new Point(218, 1001);
             textBoxTitle.Name = "textBoxTitle";
-            textBoxTitle.Size = new Size(250, 47);
+            textBoxTitle.Size = new Size(418, 47);
             textBoxTitle.TabIndex = 3;
             // 
             // lblYear
             // 
             lblYear.AutoSize = true;
-            lblYear.Location = new Point(54, 1016);
+            lblYear.Location = new Point(52, 1145);
             lblYear.Name = "lblYear";
             lblYear.Size = new Size(73, 41);
             lblYear.TabIndex = 2;
@@ -421,7 +427,7 @@
             // lblTitle
             // 
             lblTitle.AutoSize = true;
-            lblTitle.Location = new Point(54, 878);
+            lblTitle.Location = new Point(52, 1007);
             lblTitle.Name = "lblTitle";
             lblTitle.Size = new Size(74, 41);
             lblTitle.TabIndex = 4;
@@ -429,9 +435,9 @@
             // 
             // textBoxYear
             // 
-            textBoxYear.Location = new Point(220, 1010);
+            textBoxYear.Location = new Point(218, 1139);
             textBoxYear.Name = "textBoxYear";
-            textBoxYear.Size = new Size(250, 47);
+            textBoxYear.Size = new Size(418, 47);
             textBoxYear.TabIndex = 1;
             // 
             // rentalsTsb
@@ -446,7 +452,7 @@
             // 
             // groupBoxRentals
             // 
-            groupBoxRentals.Controls.Add(checkBox1);
+            groupBoxRentals.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             groupBoxRentals.Controls.Add(btnReturnRental);
             groupBoxRentals.Controls.Add(btnAddRental);
             groupBoxRentals.Controls.Add(lblDtpRental);
@@ -456,27 +462,18 @@
             groupBoxRentals.Controls.Add(comboBoxMovies);
             groupBoxRentals.Controls.Add(comboBoxClients);
             groupBoxRentals.Controls.Add(listViewRentals);
+            groupBoxRentals.Controls.Add(groupBox1);
             groupBoxRentals.Location = new Point(3, 3);
             groupBoxRentals.Name = "groupBoxRentals";
-            groupBoxRentals.Size = new Size(2138, 1166);
+            groupBoxRentals.Size = new Size(2376, 1320);
             groupBoxRentals.TabIndex = 0;
             groupBoxRentals.TabStop = false;
             // 
-            // checkBox1
-            // 
-            checkBox1.AutoSize = true;
-            checkBox1.Location = new Point(1454, 917);
-            checkBox1.Name = "checkBox1";
-            checkBox1.Size = new Size(197, 45);
-            checkBox1.TabIndex = 12;
-            checkBox1.Text = "checkBox1";
-            checkBox1.UseVisualStyleBackColor = true;
-            // 
             // btnReturnRental
             // 
-            btnReturnRental.Location = new Point(235, 1053);
+            btnReturnRental.Location = new Point(950, 891);
             btnReturnRental.Name = "btnReturnRental";
-            btnReturnRental.Size = new Size(188, 58);
+            btnReturnRental.Size = new Size(397, 103);
             btnReturnRental.TabIndex = 11;
             btnReturnRental.Text = "Add Return";
             btnReturnRental.UseVisualStyleBackColor = true;
@@ -484,7 +481,7 @@
             // 
             // btnAddRental
             // 
-            btnAddRental.Location = new Point(722, 959);
+            btnAddRental.Location = new Point(133, 1174);
             btnAddRental.Name = "btnAddRental";
             btnAddRental.Size = new Size(188, 58);
             btnAddRental.TabIndex = 10;
@@ -495,7 +492,7 @@
             // lblDtpRental
             // 
             lblDtpRental.AutoSize = true;
-            lblDtpRental.Location = new Point(114, 976);
+            lblDtpRental.Location = new Point(133, 1092);
             lblDtpRental.Name = "lblDtpRental";
             lblDtpRental.Size = new Size(170, 41);
             lblDtpRental.TabIndex = 8;
@@ -504,15 +501,15 @@
             // dateTimeRental
             // 
             dateTimeRental.ImeMode = ImeMode.NoControl;
-            dateTimeRental.Location = new Point(369, 970);
+            dateTimeRental.Location = new Point(388, 1086);
             dateTimeRental.Name = "dateTimeRental";
-            dateTimeRental.Size = new Size(302, 47);
+            dateTimeRental.Size = new Size(359, 47);
             dateTimeRental.TabIndex = 6;
             // 
             // lblCbMovie
             // 
             lblCbMovie.AutoSize = true;
-            lblCbMovie.Location = new Point(114, 910);
+            lblCbMovie.Location = new Point(133, 1026);
             lblCbMovie.Name = "lblCbMovie";
             lblCbMovie.Size = new Size(100, 41);
             lblCbMovie.TabIndex = 5;
@@ -521,7 +518,7 @@
             // lblCbClient
             // 
             lblCbClient.AutoSize = true;
-            lblCbClient.Location = new Point(114, 837);
+            lblCbClient.Location = new Point(133, 953);
             lblCbClient.Name = "lblCbClient";
             lblCbClient.Size = new Size(94, 41);
             lblCbClient.TabIndex = 4;
@@ -530,17 +527,17 @@
             // comboBoxMovies
             // 
             comboBoxMovies.FormattingEnabled = true;
-            comboBoxMovies.Location = new Point(369, 902);
+            comboBoxMovies.Location = new Point(388, 1018);
             comboBoxMovies.Name = "comboBoxMovies";
-            comboBoxMovies.Size = new Size(302, 49);
+            comboBoxMovies.Size = new Size(359, 49);
             comboBoxMovies.TabIndex = 3;
             // 
             // comboBoxClients
             // 
             comboBoxClients.FormattingEnabled = true;
-            comboBoxClients.Location = new Point(369, 829);
+            comboBoxClients.Location = new Point(388, 945);
             comboBoxClients.Name = "comboBoxClients";
-            comboBoxClients.Size = new Size(302, 49);
+            comboBoxClients.Size = new Size(359, 49);
             comboBoxClients.TabIndex = 2;
             // 
             // listViewRentals
@@ -551,7 +548,7 @@
             listViewRentals.GridLines = true;
             listViewRentals.Location = new Point(25, 12);
             listViewRentals.Name = "listViewRentals";
-            listViewRentals.Size = new Size(2083, 762);
+            listViewRentals.Size = new Size(2321, 762);
             listViewRentals.TabIndex = 1;
             listViewRentals.UseCompatibleStateImageBehavior = false;
             listViewRentals.View = View.Details;
@@ -576,6 +573,15 @@
             // 
             returnDate.Text = "Return Date";
             // 
+            // groupBox1
+            // 
+            groupBox1.Location = new Point(62, 869);
+            groupBox1.Name = "groupBox1";
+            groupBox1.Size = new Size(813, 420);
+            groupBox1.TabIndex = 13;
+            groupBox1.TabStop = false;
+            groupBox1.Text = "Add  Rental";
+            // 
             // statistics
             // 
             statistics.Location = new Point(10, 58);
@@ -592,11 +598,13 @@
             // 
             // menuStrip1
             // 
+            menuStrip1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            menuStrip1.Dock = DockStyle.None;
             menuStrip1.ImageScalingSize = new Size(40, 40);
             menuStrip1.Items.AddRange(new ToolStripItem[] { fileToolStripMenuItem, exitToolStripMenuItem, aboutToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(2977, 49);
+            menuStrip1.Size = new Size(307, 49);
             menuStrip1.TabIndex = 1;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -610,31 +618,31 @@
             // toolStripSeparator1
             // 
             toolStripSeparator1.Name = "toolStripSeparator1";
-            toolStripSeparator1.Size = new Size(445, 6);
+            toolStripSeparator1.Size = new Size(415, 6);
             // 
             // printRentalsListToolStripMenuItem
             // 
             printRentalsListToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { printDocumentToolStripMenuItem });
             printRentalsListToolStripMenuItem.Name = "printRentalsListToolStripMenuItem";
-            printRentalsListToolStripMenuItem.Size = new Size(448, 54);
+            printRentalsListToolStripMenuItem.Size = new Size(418, 54);
             printRentalsListToolStripMenuItem.Text = "Print Rentals List";
             // 
             // printDocumentToolStripMenuItem
             // 
             printDocumentToolStripMenuItem.Name = "printDocumentToolStripMenuItem";
-            printDocumentToolStripMenuItem.Size = new Size(448, 54);
+            printDocumentToolStripMenuItem.Size = new Size(392, 54);
             printDocumentToolStripMenuItem.Text = "Print Document";
             printDocumentToolStripMenuItem.Click += printDocumentToolStripMenuItem_Click;
             // 
             // toolStripSeparator2
             // 
             toolStripSeparator2.Name = "toolStripSeparator2";
-            toolStripSeparator2.Size = new Size(445, 6);
+            toolStripSeparator2.Size = new Size(415, 6);
             // 
             // exportClientsListToolStripMenuItem
             // 
             exportClientsListToolStripMenuItem.Name = "exportClientsListToolStripMenuItem";
-            exportClientsListToolStripMenuItem.Size = new Size(448, 54);
+            exportClientsListToolStripMenuItem.Size = new Size(418, 54);
             exportClientsListToolStripMenuItem.Text = "Export Clients List";
             exportClientsListToolStripMenuItem.Click += exportClientsListToolStripMenuItem_Click;
             // 
@@ -662,7 +670,7 @@
             // 
             AutoScaleDimensions = new SizeF(17F, 41F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(2977, 1535);
+            ClientSize = new Size(2441, 1495);
             Controls.Add(tabControlMain);
             Controls.Add(menuStrip1);
             MainMenuStrip = menuStrip1;
@@ -742,7 +750,6 @@
         private Label lblTitle;
         private TextBox textBoxYear;
         private ErrorProvider errorProvider;
-        private CheckBox checkBox1;
         private TabPage statistics;
         private MenuStrip menuStrip1;
         private ToolStripMenuItem fileToolStripMenuItem;
@@ -754,5 +761,6 @@
         private ToolStripMenuItem exportClientsListToolStripMenuItem;
         private ToolStripMenuItem closeFormToolStripMenuItem;
         private ToolStripMenuItem printDocumentToolStripMenuItem;
+        private GroupBox groupBox1;
     }
 }

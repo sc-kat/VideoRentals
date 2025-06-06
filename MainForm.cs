@@ -57,7 +57,6 @@ namespace CassetteRentals
             float x = e.MarginBounds.Left;
             float y = e.MarginBounds.Top;
 
-            // Draw header
             string[] headers = listViewRentals.Columns.Cast<ColumnHeader>().Select(c => c.Text).ToArray();
             for (int i = 0; i < headers.Length; i++)
             {
@@ -66,7 +65,6 @@ namespace CassetteRentals
 
             y += lineHeight;
 
-            // Draw each row
             foreach (ListViewItem item in listViewRentals.Items)
             {
                 for (int i = 0; i < item.SubItems.Count; i++)
@@ -105,7 +103,7 @@ namespace CassetteRentals
                     {
                         if (DateTime.TryParse(reader["RentalDate"].ToString(), out DateTime rentalDate))
                         {
-                            string key = rentalDate.ToString("MMM yyyy"); // ex: "Jun 2025"
+                            string key = rentalDate.ToString("MMM yyyy");
                             if (result.ContainsKey(key))
                                 result[key]++;
                             else
@@ -319,7 +317,6 @@ namespace CassetteRentals
         private void btnAddClient_Click(object sender, EventArgs e)
         {
             if (!ValidateChildren()) return;
-            // Validate inputs
             if (string.IsNullOrWhiteSpace(textBoxFn.Text) ||
                 string.IsNullOrWhiteSpace(textBoxLn.Text) ||
                 string.IsNullOrWhiteSpace(textBoxEmail.Text) ||
@@ -350,13 +347,11 @@ namespace CassetteRentals
                 }
             }
 
-            // Clear input fields
             textBoxFn.Clear();
             textBoxLn.Clear();
             textBoxEmail.Clear();
             textBoxPhone.Clear();
 
-            // Reload clients from DB
             LoadClientsFromDatabase();
             LoadClientComboBox();
         }
@@ -393,7 +388,6 @@ namespace CassetteRentals
                 }
             }
 
-            // Reset selection and fields
             selectedClientId = null;
             textBoxFn.Clear();
             textBoxLn.Clear();
@@ -434,14 +428,12 @@ namespace CassetteRentals
                 }
             }
 
-            // Reset UI
             selectedClientId = null;
             textBoxFn.Clear();
             textBoxLn.Clear();
             textBoxEmail.Clear();
             textBoxPhone.Clear();
 
-            // Refresh list
             LoadClientsFromDatabase();
             LoadClientComboBox();
         }
@@ -482,13 +474,11 @@ namespace CassetteRentals
                 }
             }
 
-            // Clear fields
             textBoxTitle.Clear();
             textBoxGenre.Clear();
             textBoxYear.Clear();
             chkBoxAvailable.Checked = false;
 
-            // Reload
             LoadMoviesFromDatabase();
             LoadMovieComboBox();
         }
@@ -597,13 +587,11 @@ namespace CassetteRentals
             {
                 conn.Open();
 
-                // Enforce foreign key constraints
                 using (var pragmaCmd = new SQLiteCommand("PRAGMA foreign_keys = ON;", conn))
                 {
                     pragmaCmd.ExecuteNonQuery();
                 }
 
-                // Insert rental with NULL ReturnDate
                 string insertRental = @"INSERT INTO Rentals (ClientId, MovieId, RentalDate, ReturnDate)
                                 VALUES (@ClientId, @MovieId, @RentalDate, NULL)";
                 using (var cmd = new SQLiteCommand(insertRental, conn))
@@ -614,7 +602,6 @@ namespace CassetteRentals
                     cmd.ExecuteNonQuery();
                 }
 
-                // Mark movie as unavailable
                 string updateMovie = "UPDATE Movies SET IsAvailable = 0 WHERE Id = @MovieId";
                 using (var cmd = new SQLiteCommand(updateMovie, conn))
                 {
@@ -625,7 +612,6 @@ namespace CassetteRentals
 
             MessageBox.Show("Rental added successfully!");
 
-            // Refresh UI
             LoadMoviesFromDatabase();
             LoadMovieComboBox();
             LoadRentalsFromDatabase();
@@ -686,7 +672,6 @@ namespace CassetteRentals
             {
                 conn.Open();
 
-                // 1. Update ReturnDate for the rental
                 string updateRental = @"UPDATE Rentals SET ReturnDate = @ReturnDate WHERE Id = @RentalId";
                 using (var cmd = new SQLiteCommand(updateRental, conn))
                 {
@@ -695,7 +680,6 @@ namespace CassetteRentals
                     cmd.ExecuteNonQuery();
                 }
 
-                // 2. Get MovieId for this rental
                 int movieId = -1;
                 string getMovieId = "SELECT MovieId FROM Rentals WHERE Id = @RentalId";
                 using (var cmd = new SQLiteCommand(getMovieId, conn))
@@ -710,7 +694,6 @@ namespace CassetteRentals
                     }
                 }
 
-                // 3. Mark the movie as available again
                 if (movieId != -1)
                 {
                     string updateMovie = "UPDATE Movies SET IsAvailable = 1 WHERE Id = @MovieId";
@@ -739,11 +722,9 @@ namespace CassetteRentals
                 {
                     using (StreamWriter sw = new StreamWriter(sfd.FileName))
                     {
-                        // Header
                         var headers = listView.Columns.Cast<ColumnHeader>().Select(c => c.Text);
                         sw.WriteLine(string.Join(",", headers));
 
-                        // Rows
                         foreach (ListViewItem item in listView.Items)
                         {
                             var row = item.SubItems.Cast<ListViewItem.ListViewSubItem>().Select(s => s.Text);
